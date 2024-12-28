@@ -1,4 +1,5 @@
 from itertools import product
+from typing import List, Tuple
 
 __all__ = ["backtrack"]
 
@@ -45,7 +46,7 @@ def place_piece(x, y, shape, board, value):
         board[nx][ny] = value
 
 
-def backtrack(piece_index, board, pieces, solution_count):
+def backtrack(piece_index, board, pieces: List[List[Tuple[int, int]]], solution_count):
     """Backtracking algorithm."""
     if piece_index == len(pieces):
         solution_count[0] += 1
@@ -54,7 +55,7 @@ def backtrack(piece_index, board, pieces, solution_count):
         return
 
     piece = pieces[piece_index]
-    unique_shapes = generate_transformations(piece.cells)
+    unique_shapes = generate_transformations(piece)
 
     for shape in unique_shapes:
         for x, y in product(range(len(board)), range(len(board[0]))):
@@ -65,7 +66,13 @@ def backtrack(piece_index, board, pieces, solution_count):
                     return
                 place_piece(x, y, shape, board, 1)  # Remove placement
 
-def backtrack_one(board, piece):
+def backtrack_one(board: List[List[int]], piece: List[List[int]]):
     solution_count = [0, False]  # [count, max_check]
-    backtrack(0, board, [piece], solution_count)
+    
+    piece_for_backtrack: List[Tuple[int, int]] = []
+    for x, y in product(range(len(piece)), range(len(piece[0]))):
+        if piece[x][y] == 1:
+            piece_for_backtrack.append((x, y))
+
+    backtrack(0, board, [piece_for_backtrack], solution_count)
     return solution_count[0]

@@ -1,91 +1,78 @@
-from typing import List
-
-
-class Piece:
-    def __init__(self, name, cells):
-        self.name: str = name
-        self.cells_2d: List[List[int]] = cells
-
-    @property
-    def cells(self):
-        return [(x, y) for x, row in enumerate(self.cells_2d) for y, value in enumerate(row) if value == 1]
-
-    def __str__(self):
-        return self.name
-
-pentomino = [
-    Piece("V", [
+pentomino = {
+    "V":  [
         [1, 1, 1],
         [0, 0, 1],
         [0, 0, 1]
-    ]),
-    Piece("T", [
+    ],
+    "T":  [
         [1, 1, 1],
         [0, 1, 0],
         [0, 1, 0]
-    ]),
-    Piece("F", [
+    ],
+    "F":  [
         [0, 1, 1],
         [1, 1, 0],
         [0, 1, 0]
-    ]),
-    Piece("W", [
+    ],
+    "W":  [
         [1, 1, 0],
         [0, 1, 1],
         [0, 0, 1]
-    ]),
-    Piece("U", [
+    ],
+    "U":  [
         [1, 1],
         [1, 0],
         [1, 1]
-    ]),
-    Piece("X", [
+    ],
+    "X":  [
         [0, 1, 0],
         [1, 1, 1],
         [0, 1, 0]
-    ]),
-    Piece("I", [[1, 1, 1, 1, 1]]),
-    Piece("Y", [
+    ],
+    "I": [
+        [1, 1, 1, 1, 1]
+    ],
+    "Y": [
         [1, 1, 1, 1],
         [0, 0, 1, 0]
-    ]),
-    Piece("L", [
+    ],
+    "L": [
         [1, 1, 1, 1],
         [0, 0, 0, 1]
-    ]),
-    Piece("P", [
+    ],
+    "P": [
         [1, 1, 1],
         [1, 1, 0]
-    ]),
-    Piece("Z", [
+    ],
+    "Z": [
         [1, 1, 0],
         [0, 1, 0],
         [0, 1, 1]
-    ]),
-    Piece("N", [
+    ],
+    "N": [
         [1, 1, 1, 0],
         [0, 0, 1, 1]
-    ])
-]
+    ]
+}
 
-tetramino = [
-    Piece("o", [
+tetramino = {
+    "o": [
         [1, 1],
         [1, 1]
-    ]),
-    Piece("i", [
+    ],
+    "i": [
         [1, 1, 1, 1]
-    ]),
-    Piece("s", [
+    ],
+    "s": [
         [0, 1, 1],
         [1, 1, 0]
-    ]),
-    Piece("t", [
+    ],
+    "t": [
         [0, 1, 0],
         [1, 1, 1]
-    ]),
-    Piece("l", [
+    ],
+    "l": [
         [1, 1, 1],
         [1, 0, 0] 
-    ])
-]
+    ]
+}
