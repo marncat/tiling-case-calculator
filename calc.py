@@ -1,5 +1,5 @@
-from backtrack import count_cases
-from piece import *
+from count_cases import count_cases
+from pieces import *
 from itertools import product, combinations
 from typing import List, Tuple
 
@@ -50,12 +50,12 @@ def calc(boards: List[List[List[int]]], board_counts: List[int] = None):
     if board_counts is None:
         board_counts = [1] * len(boards)
 
-    for name, piece in pentomino_for_backtracking.items():
-        result = [count_cases(board, piece) for board in boards]
+    for name, unique_shapes in pentomino_for_counting.items():
+        result = [count_cases(board, unique_shapes) for board in boards]
         pentomino_counts.append(Block(name, result))
 
-    for name, piece in tetramino_for_backtracking.items():
-        result = [count_cases(board, piece) for board in boards]
+    for name, unique_shapes in tetramino_for_counting.items():
+        result = [count_cases(board, unique_shapes) for board in boards]
         tetramino_counts.append(Block(name, result))
 
     result = {}

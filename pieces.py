@@ -99,10 +99,27 @@ class Shape:
     def __eq__(self, value: object, /) -> bool:
         return hash(self) == hash(value)
 
-pentomino_for_backtracking = {
-    k: Shape(len(v), len(v[0]), [(x, y) for x, y in product(range(len(v)), range(len(v[0]))) if v[x][y] == 1]) for k, v in pentomino.items()    
+def generate_transformations(shape: Shape):
+    """Generate all transformations (rotations and flips)."""
+    unique_shapes = set()
+
+    # Generate rotations
+    for _ in range(4):
+        unique_shapes.add(shape)
+        shape = shape.rotate()
+
+    # Flip horizontally and check rotations again
+    shape = shape.flip()
+    for _ in range(4):
+        unique_shapes.add(shape)
+        shape = shape.rotate()
+
+    return unique_shapes
+
+pentomino_for_counting = {
+    k: generate_transformations(Shape(len(v), len(v[0]), [(x, y) for x, y in product(range(len(v)), range(len(v[0]))) if v[x][y] == 1])) for k, v in pentomino.items()    
 }
 
-tetramino_for_backtracking = {
-    k: Shape(len(v), len(v[0]), [(x, y) for x, y in product(range(len(v)), range(len(v[0]))) if v[x][y] == 1]) for k, v in tetramino.items()    
+tetramino_for_counting = {
+    k: generate_transformations(Shape(len(v), len(v[0]), [(x, y) for x, y in product(range(len(v)), range(len(v[0]))) if v[x][y] == 1])) for k, v in tetramino.items()    
 }
